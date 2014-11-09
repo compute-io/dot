@@ -25,7 +25,16 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "algebra",
+    "linear algebra",
+    "dot product",
+    "vector",
+    "array",
+    "calculus",
+    "geometry",
+    "mathematics",
+    "math"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/dot/issues"

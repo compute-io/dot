@@ -1,4 +1,4 @@
-dot
+Dot Product
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
@@ -19,18 +19,41 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 To use the module,
 
 ``` javascript
-var foo = require( 'compute-dot' );
+var dot = require( 'compute-dot' );
 ```
 
-#### foo( arr )
+#### dot( x, y )
 
-What does this function do?
+Computes the [dot product] between two numeric `arrays` which are of equal length.
+
+``` javascript
+var val = dot( [1,2,3], [4,5,6] );
+// returns 32
+```
+
 
 
 ## Examples
 
 ``` javascript
-var foo = require( 'compute-dot' );
+var dot = require( 'compute-dot' );
+
+// Simulate some data...
+var x = new Array( 100 ),
+	y = new Array( 100 );
+
+var val;
+for ( var i = 0; i < x.length; i++ ) {
+	val = Math.round( Math.random()*100 ) + 1;
+	x[ i ] = val;
+	if ( i % 2 === 0 ) {
+		val = -val;
+	}
+	y[ i ] = 1 / val;
+}
+
+console.log( dot( x, y ) );
+// returns ~0 (floating-point errors)
 ```
 
 To run the example code from the top-level application directory,
