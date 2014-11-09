@@ -24,7 +24,7 @@ var dot = require( 'compute-dot' );
 
 #### dot( x, y )
 
-Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two numeric `arrays` which are of equal length.
+Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two numeric `arrays` of equal length.
 
 ``` javascript
 var val = dot( [1,2,3], [4,5,6] );
