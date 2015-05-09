@@ -22,7 +22,7 @@ To use the module,
 var dot = require( 'compute-dot' );
 ```
 
-#### dot( x, y )
+#### dot( x, y[, accessor] )
 
 Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two numeric `arrays` of equal length.
 
@@ -31,6 +31,37 @@ var val = dot( [1,2,3], [4,5,6] );
 // returns 32
 ```
 
+To compute the dot product between nested `array` values, provide an accessor `function` for accessing `array` values.
+
+``` javascript
+var a = [
+	{'x':2},
+	{'x':4},
+	{'x':5}
+];
+
+var b = [
+	[1,3],
+	[2,1],
+	[3,5]
+];
+
+function getValue( d, i, j ) {
+	if ( j === 0 ) {
+		return d.x;
+	}
+	return d[ 1 ];
+}
+
+var res = dot( a, b, getValue );
+// returns 35
+```
+
+The accessor `function` is provided three arguments:
+
+-	__d__: current datum.
+-	__i__: current datum index.
+-	__j__: sequence index; e.g., sequence `a` has index `0` and sequence `b` has index `1`.
 
 
 ## Examples
@@ -91,15 +122,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT). 
+[MIT license](http://opensource.org/licenses/MIT).
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-dot.svg
