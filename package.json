@@ -1,6 +1,6 @@
 {
   "name": "compute-dot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Computes the dot product between two numeric arrays.",
   "author": {
     "name": "Athan Reines",
