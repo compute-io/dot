@@ -2,7 +2,7 @@ Dot Product
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two numeric arrays.
+> Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two arrays.
 
 
 ## Installation
@@ -16,31 +16,29 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-To use the module,
-
 ``` javascript
 var dot = require( 'compute-dot' );
 ```
 
 #### dot( x, y[, accessor] )
 
-Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two numeric `arrays` of equal length.
+Computes the [dot product](http://en.wikipedia.org/wiki/Dot_product) between two `arrays` of equal length.
 
 ``` javascript
 var val = dot( [1,2,3], [4,5,6] );
 // returns 32
 ```
 
-To compute the dot product between nested `array` values, provide an accessor `function` for accessing `array` values.
+To compute the [dot product](http://en.wikipedia.org/wiki/Dot_product) between nested `array` values, provide an accessor `function` for accessing `numeric` values.
 
 ``` javascript
-var a = [
+var x = [
 	{'x':2},
 	{'x':4},
 	{'x':5}
 ];
 
-var b = [
+var y = [
 	[1,3],
 	[2,1],
 	[3,5]
@@ -53,7 +51,7 @@ function getValue( d, i, j ) {
 	return d[ 1 ];
 }
 
-var res = dot( a, b, getValue );
+var val = dot( x, y, getValue );
 // returns 35
 ```
 
@@ -61,7 +59,10 @@ The accessor `function` is provided three arguments:
 
 -	__d__: current datum.
 -	__i__: current datum index.
--	__j__: sequence index; e.g., sequence `a` has index `0` and sequence `b` has index `1`.
+-	__j__: array index; e.g., array `x` has index `0` and array `y` has index `1`.
+
+
+If provided empty `arrays`, the function returns `null`.
 
 
 ## Examples

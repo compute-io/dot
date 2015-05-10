@@ -1,3 +1,4 @@
+/* global require, describe, it */
 'use strict';
 
 // MODULES //
@@ -29,6 +30,7 @@ describe( 'compute-dot', function tests() {
 			'5',
 			null,
 			undefined,
+			true,
 			NaN,
 			{},
 			function(){}
@@ -37,7 +39,6 @@ describe( 'compute-dot', function tests() {
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
 		}
-
 		function badValue( value ) {
 			return function() {
 				dot( value, [] );
@@ -52,6 +53,7 @@ describe( 'compute-dot', function tests() {
 			null,
 			undefined,
 			NaN,
+			true,
 			{},
 			function(){}
 		];
@@ -59,7 +61,6 @@ describe( 'compute-dot', function tests() {
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
 		}
-
 		function badValue( value ) {
 			return function() {
 				dot( [], value );
@@ -89,12 +90,15 @@ describe( 'compute-dot', function tests() {
 		}
 	});
 
-
 	it( 'should throw an error if the input arrays are not the same length', function test() {
 		expect( foo ).to.throw( Error );
 		function foo() {
 			dot( [1,2,3], [1,2] );
 		}
+	});
+
+	it( 'should return null if provided empty arrays', function test() {
+		assert.isNull( dot( [], [] ) );
 	});
 
 	it( 'should compute the dot product', function test() {

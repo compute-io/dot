@@ -39,7 +39,8 @@
     "calculus",
     "geometry",
     "mathematics",
-    "math"
+    "math",
+    "dot"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/dot/issues"
