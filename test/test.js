@@ -1,3 +1,4 @@
+/* global require, describe, it */
 'use strict';
 
 // MODULES //
@@ -29,6 +30,7 @@ describe( 'compute-dot', function tests() {
 			'5',
 			null,
 			undefined,
+			true,
 			NaN,
 			{},
 			function(){}
@@ -37,7 +39,6 @@ describe( 'compute-dot', function tests() {
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
 		}
-
 		function badValue( value ) {
 			return function() {
 				dot( value, [] );
@@ -52,6 +53,7 @@ describe( 'compute-dot', function tests() {
 			null,
 			undefined,
 			NaN,
+			true,
 			{},
 			function(){}
 		];
@@ -59,10 +61,31 @@ describe( 'compute-dot', function tests() {
 		for ( var i = 0; i < values.length; i++ ) {
 			expect( badValue( values[i] ) ).to.throw( TypeError );
 		}
-
 		function badValue( value ) {
 			return function() {
 				dot( [], value );
+			};
+		}
+	});
+
+	it( 'should throw an error if provided an accessor argument which is not a function', function test() {
+		var values = [
+			'5',
+			5,
+			true,
+			undefined,
+			null,
+			NaN,
+			[],
+			{}
+		];
+
+		for ( var i = 0; i < values.length; i++ ) {
+			expect( badValue( values[ i ] ) ).to.throw( TypeError );
+		}
+		function badValue( value ) {
+			return function() {
+				dot( [ 1, 2, 3 ], [ 1, 2, 3 ], value );
 			};
 		}
 	});
@@ -74,6 +97,10 @@ describe( 'compute-dot', function tests() {
 		}
 	});
 
+	it( 'should return null if provided empty arrays', function test() {
+		assert.isNull( dot( [], [] ) );
+	});
+
 	it( 'should compute the dot product', function test() {
 		var x = [ 1, 2, 3 ],
 			y = [ 4, 5, 6 ],
@@ -83,6 +110,33 @@ describe( 'compute-dot', function tests() {
 		actual = dot( x, y );
 
 		assert.strictEqual( actual, expected );
+	});
+
+	it( 'should compute the dot product using an accessor function', function test() {
+		var dat1, dat2, expected, actual;
+
+		dat1 = [
+			{'x':2},
+			{'x':4},
+			{'x':5}
+		];
+		dat2 = [
+			[1,3],
+			[2,1],
+			[3,5]
+		];
+
+		actual = dot( dat1, dat2, getValue );
+		expected = 35;
+
+		assert.strictEqual( actual, expected );
+
+		function getValue( d, i, j ) {
+			if ( j === 0 ) {
+				return d.x;
+			}
+			return d[ 1 ];
+		}
 	});
 
 });
